@@ -5,6 +5,9 @@ return array(
     'MODULE_DENY_LIST'   => array('Common', 'Api'),
     'MODULE_ALLOW_LIST'  => array('Home','Admin','Mobile'),
 
+    /* 系统数据加密设置 */
+    'DATA_AUTH_KEY' => 'ab+GMpX2Y)0:J,/tk*uqL8De.WV-SjIfx{3}7Us^', //默认数据加密KEY
+
 
     /* 调试配置 */
     'SHOW_PAGE_TRACE' => true,
