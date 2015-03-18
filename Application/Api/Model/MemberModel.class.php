@@ -174,7 +174,29 @@ class MemberModel extends Model{
 
 		$user = $this->where($map)->field('uid,username,email,mobile,status')->find();
 		if(is_array($user) && $user['status'] = 1){
-			return array($user['id'], $user['username'], $user['email'], $user['mobile']);
+			return array($user['uid'], $user['username'], $user['email'], $user['mobile']);
+		} else {
+			return -1; //用户不存在或被禁用
+		}
+	}
+
+		/**
+	 * 获取用户信息
+	 * @param  string  $uid         用户ID或用户名
+	 * @param  boolean $is_username 是否使用用户名查询
+	 * @return array                用户信息
+	 */
+	public function detailInfo($uid,$is_username=false ,$field='password'){
+		$map = array();
+		if($is_username){ //通过用户名获取
+			$map['username'] = $uid;
+		} else {
+			$map['uid'] = $uid;
+		}
+
+		$user = $this->where($map)->field($field,true)->find();
+		if(is_array($user) && $user['status'] = 1){
+			return$user;
 		} else {
 			return -1; //用户不存在或被禁用
 		}

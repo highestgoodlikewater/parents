@@ -3,7 +3,7 @@
 namespace Api\Model;
 use Think\Model;
 /**
- * 会员模型
+ * 分组模型模型
  */
 class GroupModel extends Model{
 	/**
@@ -31,7 +31,7 @@ class GroupModel extends Model{
 	protected function getStatus(){
 		return 1; //TODO: 暂不限制，下一个版本完善
 	}
-    //增加登陆记录
+    //增加用户组
 	public  function  addGroup($uid,$group_name,$remarker=''){
 
         $data = array(
@@ -62,16 +62,16 @@ class GroupModel extends Model{
 		}
 		return $this->where(array('id'=>$id))->save($data);
 	}
-
+    //删除分组
 	public  function deleteGroup($id){
 		$ids=is_array($id)?implode(',', $id):$id;
         return $this->delete($ids);
 	}
-
+    //根据group_id 获得分组的信息
 	public function  getGroupInfo($group_id){
       return $this->find($group_id);
 	}
-
+     //根据uid 获得属于自己的分组
 	public function  getGroupsByuid($uid){
 		$map['uid']=$uid;
       return $this->where($uid)->select();

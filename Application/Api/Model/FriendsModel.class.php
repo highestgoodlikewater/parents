@@ -3,7 +3,7 @@
 namespace Api\Model;
 use Think\Model;
 /**
- * 会员模型
+ * 好友模型
  */
 class FriendsModel extends Model{
 	/**
@@ -69,7 +69,5 @@ class FriendsModel extends Model{
 
 		 return $this->where($data)->delete();
 	}
-
-
 
 }
