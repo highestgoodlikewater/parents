@@ -64,8 +64,10 @@ class GroupModel extends Model{
 	}
     //删除分组
 	public  function deleteGroup($id){
-		$ids=is_array($id)?implode(',', $id):$id;
-        return $this->delete($ids);
+		$id    = array_unique((array)I('id',0));
+        $id    = is_array($id) ? implode(',',$id) : $id;
+        $where = array_merge( array('id' => array('in', $id )) ,(array)$where );
+        return $this->delete($where);
 	}
     //根据group_id 获得分组的信息
 	public function  getGroupInfo($group_id){

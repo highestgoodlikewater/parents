@@ -22,7 +22,7 @@ class ScoreLevelModel extends Model{
 
 	/* 用户模型自动完成 */
 	protected $_auto = array(
-		array('status', 'getStatus', self::MODEL_BOTH, 'callback'),
+		array('status', 'getStatus', self::MODEL_INSERT, 'callback'),
 	);
 	protected function getStatus(){
 		return 1; //TODO: 暂不限制，下一个版本完善
@@ -51,8 +51,10 @@ class ScoreLevelModel extends Model{
 
 		  //更新积分等级信息
 	public function deleteLevel($id){
-
-       return  $this->where(array('id'=>$id))->delete();
+        $id    = array_unique((array)I('id',0));
+        $id    = is_array($id) ? implode(',',$id) : $id;
+        $where = array_merge( array('id' => array('in', $id )) ,(array)$where );
+       return  $this->where($where)->delete();
 	}
 
 			  //更新积分等级信息

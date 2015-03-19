@@ -45,7 +45,7 @@ class MemberModel extends Model{
 		array('password', 'md5', self::MODEL_BOTH, 'function'),
 		array('reg_time', NOW_TIME, self::MODEL_INSERT),
 		array('reg_ip', 'get_client_ip', self::MODEL_INSERT, 'function', 1),
-		array('status', 'getStatus', self::MODEL_BOTH, 'callback'),
+		array('status', 'getStatus', self::MODEL_INSERT, 'callback'),
 	);
 
 	/**
@@ -262,6 +262,14 @@ class MemberModel extends Model{
        	 return $this->where($map)->field($field,true)->select();
        }
        return  $this->field($field,true)->select();
+	}
+
+	public function deleteUser($id){
+        $id    = array_unique((array)I('id',0));
+        $id    = is_array($id) ? implode(',',$id) : $id;
+        $where = array_merge( array('id' => array('in', $id )) ,(array)$where );
+
+        return  $this->where($where)->delete();
 	}
 
 	/**

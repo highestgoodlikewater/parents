@@ -24,7 +24,7 @@ class FriendsModel extends Model{
 	protected $_auto = array(
 		array('add_time', NOW_TIME, self::MODEL_INSERT),
 		array('update_time', NOW_TIME, self::MODEL_BOTH),
-		array('status', 'getStatus', self::MODEL_BOTH, 'callback'),
+		array('status', 'getStatus', self::MODEL_INSERT, 'callback'),
 	);
 	protected function getStatus(){
 		return 1; //TODO: 暂不限制，下一个版本完善

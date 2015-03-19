@@ -97,5 +97,10 @@ class UserApi extends Api{
        return $this->model->searchUser($username,$field);
     }
 
+        //删除用户
+    public  function deleteUser($id){
+       return $this->model->deleteUser($id);
+    }
+
 
 }
