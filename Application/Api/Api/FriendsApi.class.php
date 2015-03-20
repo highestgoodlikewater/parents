@@ -14,7 +14,7 @@ class FriendsApi extends Api{
         $this->model = new FriendsModel();
     }
 
-    public function addFriend($uid,$group_id,$friend_uid,$remarker=''){
+    public function addFriend($uid,$group_id=1,$friend_uid,$remarker=''){
         return $this->model->addFriend($uid,$group_id,$friend_uid,$remarker);
     }
 

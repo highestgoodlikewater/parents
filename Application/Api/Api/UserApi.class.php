@@ -83,12 +83,24 @@ class UserApi extends Api{
      * @return true 修改成功，false 修改失败
      * @author huajie <banhuajie@163.com>
      */
-    public function updateInfo($uid, $password, $data){
-        if($this->model->updateUserFields($uid, $password, $data) !== false){
-            $return['status'] = true;
+    public function updateInfo($uid,$data){
+        if($this->model->updateUserInfo($uid,$data) !== false){
+            $return['status'] = 1;
+             $return['content'] = '更新成功';
         }else{
-            $return['status'] = false;
-            $return['info'] = $this->model->getError();
+            $return['status'] = 0;
+            $return['content'] = $this->model->getError();
+        }
+        return $return;
+    }
+
+    public   function   changePasswd($uid, $password,$new_password){
+        if($this->model->updateUserPasswd($uid, $password,$new_password)!== false){
+            $return['status'] = 1;
+            $return['content'] = '密码修改成功';
+        }else{
+            $return['status'] = 0;
+            $return['content'] = $this->model->getError();
         }
         return $return;
     }
@@ -100,6 +112,10 @@ class UserApi extends Api{
         //删除用户
     public  function deleteUser($id){
        return $this->model->deleteUser($id);
+    }
+
+    public  function detailInfo($uid,$is_username=false ,$field='password'){
+       return $this->model->detailInfo($uid,$is_username ,$field);
     }
 
 

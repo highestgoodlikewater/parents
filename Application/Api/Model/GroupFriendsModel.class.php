@@ -7,7 +7,7 @@ use Think\Model\ViewModel;
 */
 class GroupFriendsModel extends ViewModel{
 	public $viewFields = array(
-     'Friends'=>array('group_id','friend_uid'),
+     'Friends'=>array('group_id','friend_uid','remarker'),
      'Member'=>array('username', '_on'=>'Friends.friend_uid=Member.uid'),
    );
 }

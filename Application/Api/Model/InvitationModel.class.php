@@ -60,11 +60,9 @@ class InvitationModel extends Model{
         return $this->delete($where);
     }
     //根据id 获得邀请的信息
-    public function  getInvitationInfoById($id){
-        $id    = array_unique((array)I('id',0));
-        $id    = is_array($id) ? implode(',',$id) : $id;
-        $where = array_merge( array('id' => array('in', $id )) ,(array)$where );
-        return $this->where($where)->select();
+    public function  getInvitationInfoById($id=0){
+
+        return $this->where(array('id'=>$id))->find();
     }
      //根据uid 获得邀请信息
     public function  InvitationInfoByUid($uid){
