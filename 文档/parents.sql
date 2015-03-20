@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2015-03-19 11:34:57
+Date: 2015-03-20 14:57:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -45128,6 +45128,30 @@ INSERT INTO `parent_district` VALUES ('45050', '梧桐镇', '4', '5024');
 INSERT INTO `parent_district` VALUES ('45051', '蔡家湖镇', '4', '5024');
 
 -- ----------------------------
+-- Table structure for parent_file
+-- ----------------------------
+DROP TABLE IF EXISTS `parent_file`;
+CREATE TABLE `parent_file` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '文件ID',
+  `name` char(30) NOT NULL DEFAULT '' COMMENT '原始文件名',
+  `savename` char(20) NOT NULL DEFAULT '' COMMENT '保存名称',
+  `savepath` char(30) NOT NULL DEFAULT '' COMMENT '文件保存路径',
+  `ext` char(5) NOT NULL DEFAULT '' COMMENT '文件后缀',
+  `mime` char(40) NOT NULL DEFAULT '' COMMENT '文件mime类型',
+  `size` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '文件大小',
+  `md5` char(32) NOT NULL DEFAULT '' COMMENT '文件md5',
+  `sha1` char(40) NOT NULL DEFAULT '' COMMENT '文件 sha1编码',
+  `location` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '文件保存位置',
+  `create_time` int(10) unsigned NOT NULL COMMENT '上传时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_md5` (`md5`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='文件表';
+
+-- ----------------------------
+-- Records of parent_file
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for parent_friends
 -- ----------------------------
 DROP TABLE IF EXISTS `parent_friends`;
@@ -45254,10 +45278,10 @@ CREATE TABLE `parent_member` (
   `live_district` varchar(255) NOT NULL DEFAULT '' COMMENT '现居住地',
   `relation_tags` varchar(255) DEFAULT NULL COMMENT '家中人物',
   `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '会员状态',
-  `photos` varchar(255) DEFAULT NULL,
+  `photos` int(11) DEFAULT NULL,
   PRIMARY KEY (`uid`),
   KEY `status` (`status`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='会员表';
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='会员表';
 
 -- ----------------------------
 -- Records of parent_member
@@ -45267,6 +45291,26 @@ INSERT INTO `parent_member` VALUES ('7', '132231', '12312', 'e10adc3949ba59abbe5
 INSERT INTO `parent_member` VALUES ('8', '123', '12321', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '0', '0000-00-00', '', '0', '0', '0', '', '', null, '0', null);
 INSERT INTO `parent_member` VALUES ('9', '35', '123121', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '0', '0000-00-00', '', '0', '0', '0', '', '', null, '0', null);
 INSERT INTO `parent_member` VALUES ('10', '13', 'qweqwe', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '0', '0000-00-00', '', '0', '0', '0', '', '', null, '0', null);
+INSERT INTO `parent_member` VALUES ('11', '12133', '4717203481@qq.com', 'e10adc3949ba59abbe56e057f20f883e', '18380113612', '', '', '0', '0000-00-00', '', '0', '2130706433', '1426821462', '', '', null, '1', null);
+
+-- ----------------------------
+-- Table structure for parent_picture
+-- ----------------------------
+DROP TABLE IF EXISTS `parent_picture`;
+CREATE TABLE `parent_picture` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id自增',
+  `path` varchar(255) NOT NULL DEFAULT '' COMMENT '路径',
+  `url` varchar(255) NOT NULL DEFAULT '' COMMENT '图片链接',
+  `md5` char(32) NOT NULL DEFAULT '' COMMENT '文件md5',
+  `sha1` char(40) NOT NULL DEFAULT '' COMMENT '文件 sha1编码',
+  `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '状态',
+  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of parent_picture
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for parent_session
@@ -45282,4 +45326,4 @@ CREATE TABLE `parent_session` (
 -- ----------------------------
 -- Records of parent_session
 -- ----------------------------
-INSERT INTO `parent_session` VALUES ('s29fu6qpfqc2cicmli5i9tg880', '1426736746', 0x7569647C693A313B);
+INSERT INTO `parent_session` VALUES ('5unb0ni75uj5tldskukfgkj782', '1426829093', 0x7569647C733A313A2236223B);
