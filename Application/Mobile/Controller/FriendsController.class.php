@@ -52,6 +52,28 @@ class FriendsController extends HomeController{
        $res =$InvitationApi->InvitationInfoByUid(session('uid'));
        echo json_encode($res);
     }
+     //更新好友资料，移动分组，修改备注
+    public function updateFriend($uid,$group_id,$friend_uid,$remarker=''){
+    	$FriendsApi=new FriendsApi;
+        $data= $FriendsApi->updateFriend($uid,$group_id,$friend_uid,$remarker);
+
+		$msg['status']=$data>0?$data:0;
+    	$msg['content']=$data>0?'更新成功':'更新失败';
+
+    	echo json_encode($msg);
+    }
+
+         //删除好友
+    public function deleteFriend($uid,$group_id,$friend_uid){
+    	$FriendsApi=new FriendsApi;
+        $data= $FriendsApi->deleteFriend($uid,$group_id,$friend_uid);
+
+		$msg['status']=$data>0?$data:0;
+    	$msg['content']=$data>0?'删除成功':'删除失败';
+
+    	echo json_encode($msg);
+    }
+
 
 
 }

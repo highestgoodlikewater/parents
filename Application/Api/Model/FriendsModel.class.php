@@ -63,9 +63,13 @@ class FriendsModel extends Model{
 
         $data = array(
 			'uid'        => $uid,
-			'group_id'   =>$group_id,
 			'friend_uid' => $friend_uid,
 		);
+
+		if (!empty($group_id)) {
+			# code...
+			$data['group_id']=$group_id;
+		}
 
 		 return $this->where($data)->delete();
 	}
