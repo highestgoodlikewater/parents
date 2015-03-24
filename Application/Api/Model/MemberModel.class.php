@@ -44,6 +44,7 @@ class MemberModel extends Model{
 	protected $_auto = array(
 		array('password', 'md5', self::MODEL_BOTH, 'function'),
 		array('reg_time', NOW_TIME, self::MODEL_INSERT),
+		array('update_time', NOW_TIME, self::MODEL_BOTH),
 		array('reg_ip', 'get_client_ip', self::MODEL_INSERT, 'function', 1),
 		array('status', 'getStatus', self::MODEL_INSERT, 'callback'),
 	);
@@ -186,13 +187,9 @@ class MemberModel extends Model{
 	 * @param  boolean $is_username 是否使用用户名查询
 	 * @return array                用户信息
 	 */
-	public function detailInfo($uid,$is_username=false ,$field='password'){
-		$map = array();
-		if($is_username){ //通过用户名获取
-			$map['username'] = $uid;
-		} else {
-			$map['uid'] = $uid;
-		}
+	public function detailInfo($uid,$field='password'){
+
+		$map['uid'] = $uid;
 
 		$user = $this->where($map)->field($field,true)->find();
 		if(is_array($user) && $user['status'] = 1){
@@ -274,11 +271,9 @@ class MemberModel extends Model{
     //$field='password'  或 $field='password,字段，字段'，表示除了这几个字段外查询所有
 	public function  searchUser($username,$field='password'){
        if (empty($username)) {
-       	# code...
        	 $map['username|email|mobile'] = array('like','%'.$username.'%');
-       	 return $this->where($map)->field($field,true)->select();
        }
-       return  $this->field($field,true)->select();
+       return  $this->where($map)->field($field,true)->select();
 	}
 
 	public function deleteUser($id){

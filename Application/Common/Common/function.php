@@ -16,7 +16,7 @@ function  getUrl($id,$type='Picture',$detail=false){
     	return $info;
     }else{
     	if($type='Picture'){
-    		$url=$infop['path']
+    		$url=$info['path'];
     	}else{
     		$url=$info['savepath'];
     	}

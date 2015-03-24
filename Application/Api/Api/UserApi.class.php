@@ -4,6 +4,7 @@
 namespace Api\Api;
 use Api\Api\Api;
 use Api\Model\MemberModel;
+use Api\Model\FriendsMemberModel;
 
 
 class UserApi extends Api{
@@ -114,8 +115,21 @@ class UserApi extends Api{
        return $this->model->deleteUser($id);
     }
 
-    public  function detailInfo($uid,$is_username=false ,$field='password'){
-       return $this->model->detailInfo($uid,$is_username ,$field);
+    public  function detailInfo($uid,$field='password'){
+       return $this->model->detailInfo($uid,$field);
+    }
+    //获取好友
+    public function  getMyFriends($uid,$friend_uid=0){
+        $FriendsMember=new  FriendsMemberModel();
+        $map['uid']=$uid;
+        if ($friend_uid!=0) {
+            $map['friend_uid']=$friend_uid;
+            $rs=$FriendsMember->where($map)->relation(true)->find();
+        }else{
+            $rs=$FriendsMember->where($map)->relation(true)->select();  
+        }
+
+        return $rs;
     }
 
 

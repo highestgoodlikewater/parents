@@ -63,7 +63,6 @@ class ScoreLevelModel extends Model{
        return  $this->where(array('id'=>$id))->find();
 	}
 
-
 	//根据分数获取积分等级
 	public function getLevelByScore($score){
       $map['min_score']=array('elt',$score);

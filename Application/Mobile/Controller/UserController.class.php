@@ -10,7 +10,7 @@ class UserController extends HomeController {
 
         $msg['status']=1;
         $msg['content']=$res;
-        if ($res==-1) {
+        if ($res<0) {
           $msg['status']=0;
           $msg['content']='个人信息获取失败！';
         }else{
@@ -42,13 +42,19 @@ class UserController extends HomeController {
 
     		$UserApi=new UserApi;
             $res=$UserApi->updateInfo(session('uid'),$data);
-            echo $res;
     	}else{
 			$msg['status']=0;
 	        $msg['content']=$info['info'];
     	}
 
-        echo json_encode($res);
+        echo json_encode($msg);
+    }
+    //获取我的好友
+    public function getMyFriends($friend_uid=0){
+            $UserApi=new UserApi;
+            $res=$UserApi->getMyFriends(session('uid'),$friend_uid);
+
+            echo json_encode($res);
     }
 
 }

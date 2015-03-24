@@ -1,8 +1,0 @@
-[ 2015-03-20T12:50:14+08:00 ] 127.0.0.1 /parents/index.php/mobile/
-NOTIC: D方法实例化没找到模型类Common\Model\PictureModel
-ERR: Think\Model:upload方法不存在！
-
-[ 2015-03-20T12:51:22+08:00 ] 127.0.0.1 /parents/index.php/mobile/
-NOTIC: D方法实例化没找到模型类Common\Model\PictureModel
-ERR: Think\Model:upload方法不存在！
-
