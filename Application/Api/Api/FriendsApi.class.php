@@ -14,15 +14,15 @@ class FriendsApi extends Api{
         $this->model = new FriendsModel();
     }
 
-    public function addFriend($uid,$group_id=1,$friend_uid,$remarker=''){
-        return $this->model->addFriend($uid,$group_id,$friend_uid,$remarker);
+    public function addFriend($uid,$friend_uid,$remarker=''){
+        return $this->model->addFriend($uid,$friend_uid,$remarker);
     }
 
-    public function updateFriend($uid,$group_id,$friend_uid,$remarker=''){
-        return $this->model->updateFriend($uid,$group_id,$friend_uid,$remarker);
+    public function updateFriend($uid,$data){
+        return $this->model->updateFriend($uid,$data);
     }
-    public function deleteFriend($uid,$group_id,$friend_uid){
-        return $this->model->deleteFriend($uid,$group_id,$friend_uid);
+    public function deleteFriend($uid,$friend_uid){
+        return $this->model->deleteFriend($uid,$friend_uid);
     }
 
 }

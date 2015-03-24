@@ -7,7 +7,7 @@ class HomeController extends Controller {
       if (!is_login()) {
       	# code...
       	$msg['status']='-1001';
-      	$msg['error']='您还没有登陆！';
+      	$msg['content']='您还没有登陆！';
       	die(json_encode($msg));
       }
     }

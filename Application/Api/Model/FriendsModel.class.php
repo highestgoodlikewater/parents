@@ -30,26 +30,10 @@ class FriendsModel extends Model{
 		return 1; //TODO: 暂不限制，下一个版本完善
 	}
 
-	public  function  addFriend($uid,$group_id,$friend_uid,$remarker=''){
+	public  function  addFriend($uid,$friend_uid,$remarker=''){
 
         $data = array(
 			'uid'        => $uid,
-			'group_id'   =>$group_id,
-			'friend_uid' => $friend_uid,
-			'login_ip'   => get_client_ip(1),
-		);
-		if (!empty($remarker)) {
-			# code...
-			$data['remarker']=$remarker;
-		}
-		 return $this->add($data);
-	}
-
-	public  function  updateFriend($uid,$group_id,$friend_uid,$remarker=''){
-
-        $data = array(
-			'uid'        => $uid,
-			'group_id'   =>$group_id,
 			'friend_uid' => $friend_uid,
 		);
 		if (!empty($remarker)) {
@@ -59,19 +43,18 @@ class FriendsModel extends Model{
 		 return $this->add($data);
 	}
 
-	public  function  deleteFriend($uid,$group_id,$friend_uid){
+	public  function  updateFriend($uid,$data){
+
+         $map['uid']=$uid;
+		 return $this->where($map)->add($data);
+	}
+
+	public  function  deleteFriend($uid,$friend_uid){
 
         $data = array(
 			'uid'        => $uid,
 			'friend_uid' => $friend_uid,
 		);
-
-		if (!empty($group_id)) {
-			# code...
-			$data['group_id']=$group_id;
-		}
-
 		 return $this->where($data)->delete();
 	}
-
 }
