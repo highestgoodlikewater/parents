@@ -29,15 +29,15 @@ class MemberModel extends Model{
 		array('password', '6,30', '密码长度不合法', self::EXISTS_VALIDATE, 'length'), //密码长度不合法
 
 		/* 验证邮箱 */
-		array('email', 'email', '邮箱格式不正确', self::EXISTS_VALIDATE), //邮箱格式不正确
-		array('email', '1,32', '邮箱长度不合法', self::EXISTS_VALIDATE, 'length'), //邮箱长度不合法
-		array('email', 'checkDenyEmail', -7, self::EXISTS_VALIDATE, 'callback'), //邮箱禁止注册
-		array('email', '','邮箱禁止注册', self::EXISTS_VALIDATE, 'unique'), //邮箱被占用
+		array('email', 'email', '邮箱格式不正确', self::VALUE_VALIDATE), //邮箱格式不正确
+		array('email', '1,32', '邮箱长度不合法', self::VALUE_VALIDATE, 'length'), //邮箱长度不合法
+		array('email', 'checkDenyEmail', -7, self::VALUE_VALIDATE, 'callback'), //邮箱禁止注册
+		array('email', '','邮箱禁止注册', self::VALUE_VALIDATE, 'unique'), //邮箱被占用
 
 		/* 验证手机号码 */
-		array('mobile', '//', '手机格式不正确', self::EXISTS_VALIDATE), //手机格式不正确 TODO:
-		array('mobile', 'checkDenyMobile', '机禁止注册', self::EXISTS_VALIDATE, 'callback'), //手机禁止注册
-		array('mobile', '', '手机号被占用', self::EXISTS_VALIDATE, 'unique'), //手机号被占用
+		array('mobile', '//', '手机格式不正确', self::VALUE_VALIDATE), //手机格式不正确 TODO:
+		array('mobile', 'checkDenyMobile', '机禁止注册', self::VALUE_VALIDATE, 'callback'), //手机禁止注册
+		array('mobile', '', '手机号被占用', self::VALUE_VALIDATE, 'unique'), //手机号被占用
 	);
 
 	/* 用户模型自动完成 */
@@ -102,11 +102,12 @@ class MemberModel extends Model{
 
 		//验证手机
 		if(empty($data['mobile'])) unset($data['mobile']);
+		if(empty($data['email'])) unset($data['email']);
 
 		/* 添加用户 */
 		if($this->create($data)){
 			$uid = $this->add();
-			$msg['status']= $uid ? $uid : 0; //0-未知错误，大于0-注册成功
+			$msg['status']= $uid >0? $uid : 0; //0-未知错误，大于0-注册成功
 			if ($uid==0) {
 				# code...
 				$msg['error']='未知错误！';
