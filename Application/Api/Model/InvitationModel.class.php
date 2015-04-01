@@ -54,7 +54,7 @@ class InvitationModel extends Model{
     }
     //删除分组
     public  function deleteInvitation($id){
-        $id    = array_unique((array)I('id',0));
+        // $id    = array_unique((array)I('id',0));
         $id    = is_array($id) ? implode(',',$id) : $id;
         $where = array_merge( array('id' => array('in', $id )) ,(array)$where );
         return $this->delete($where);

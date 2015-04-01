@@ -10,7 +10,7 @@ class FileController extends Controller {
 
     /* 文件上传 */
     public function upload($is_ajax=false){
-		$return  = array('status' => 1, 'info' => '上传成功', 'data' => '');
+		$return  = array('status' => 1, 'content' => '上传成功', 'data' => '');
 		/* 调用文件上传组件上传文件 */
 		$File = D('Common/File');
 		$file_driver = C('DOWNLOAD_UPLOAD_DRIVER');
@@ -24,10 +24,10 @@ class FileController extends Controller {
         /* 记录附件信息 */
         if($info){
             $return['data'] = json_encode($info['download']);
-            $return['info'] = $info['download']['name'];
+            $return['content'] = $info['download']['name'];
         } else {
             $return['status'] = 0;
-            $return['info']   = $File->getError();
+            $return['content']   = $File->getError();
         }
 
         /* 返回JSON数据 */
@@ -39,8 +39,6 @@ class FileController extends Controller {
         }
     }
 
-
-
     /**
      * 上传图片
      * @author huajie <banhuajie@163.com>
@@ -49,7 +47,7 @@ class FileController extends Controller {
         //TODO: 用户登录检测
 
         /* 返回标准数据 */
-        $return  = array('status' => 1, 'info' => '上传成功', 'data' => '');
+        $return  = array('status' => 1, 'content' => '上传成功', 'data' => '');
 
         /* 调用文件上传组件上传文件 */
         $Picture = D('Common/Picture');
@@ -67,7 +65,7 @@ class FileController extends Controller {
             $return = array_merge($info['download'], $return);
         } else {
             $return['status'] = 0;
-            $return['info']   = $Picture->getError();
+            $return['content']   = $Picture->getError();
         }
 
         /* 返回JSON数据 */

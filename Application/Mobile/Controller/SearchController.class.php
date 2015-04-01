@@ -2,6 +2,7 @@
 namespace Mobile\Controller;
 use Think\Controller;
 use Api\Api\UserApi;
+use Api\Api\ArticleApi;
 class SearchController extends Controller {
     public function seachUser($username=''){
       $UserApi=new UserApi;
@@ -21,5 +22,12 @@ class SearchController extends Controller {
         	$res['photo']=getUrl($res['uid']);
         }
         echo json_encode($msg);
+    }
+     //参数必须$page=1,$page_count=10,$use_page=true  ,cate_id
+    //获取文章列表
+    public function getArticleList(){
+      $ArticleApi=new ArticleApi;
+      $res=$ArticleApi->getArticleList($_POST,$page,$page_count,$use_page);
+      echo json_encode($res);
     }
 }

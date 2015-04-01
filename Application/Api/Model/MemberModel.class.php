@@ -256,7 +256,7 @@ class MemberModel extends Model{
     
     //更改用户信息(登陆后)
     public  function updateUserInfo($uid,$data){
-		if(empty($uid) || empty($password) || empty($data)){
+		if(empty($uid) ||empty($data)){
 			$this->error = '参数错误！';
 			return false;
 		}
@@ -278,7 +278,7 @@ class MemberModel extends Model{
 	}
 
 	public function deleteUser($id){
-        $id    = array_unique((array)I('id',0));
+        // $id    = array_unique((array)I('id',0));
         $id    = is_array($id) ? implode(',',$id) : $id;
         $where = array_merge( array('id' => array('in', $id )) ,(array)$where );
 

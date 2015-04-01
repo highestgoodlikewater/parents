@@ -1,13 +1,13 @@
 <?php
 namespace Mobile\Controller;
 use Think\Controller;
-use Api\Api\UserApi;
+use Api\Api\ArticleApi;
 class IndexController extends Controller {
     public function index(){
-    	// $UserApi=new UserApi;
+    	$ArticleApi=new ArticleApi;
      //  $rs=$UserApi->getMyFriends(6,8); 
      //  dump($rs);
-    	$res=M('member')->select();
+    	$res=$ArticleApi->delActicle(1);
     	dump($res);
     }
 }

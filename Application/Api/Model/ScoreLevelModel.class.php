@@ -51,7 +51,7 @@ class ScoreLevelModel extends Model{
 
 		  //更新积分等级信息
 	public function deleteLevel($id){
-        $id    = array_unique((array)I('id',0));
+        // $id    = array_unique((array)I('id',0));
         $id    = is_array($id) ? implode(',',$id) : $id;
         $where = array_merge( array('id' => array('in', $id )) ,(array)$where );
        return  $this->where($where)->delete();
