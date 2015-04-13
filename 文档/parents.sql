@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2015-03-20 14:57:20
+Date: 2015-04-13 17:07:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -58,6 +58,77 @@ CREATE TABLE `parent_action_log` (
 
 -- ----------------------------
 -- Records of parent_action_log
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for parent_article
+-- ----------------------------
+DROP TABLE IF EXISTS `parent_article`;
+CREATE TABLE `parent_article` (
+  `ariticle_id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(30) NOT NULL COMMENT '标题',
+  `small_title` varchar(30) DEFAULT NULL COMMENT '副标题',
+  `desc` varchar(255) DEFAULT NULL COMMENT '摘要',
+  `content` varchar(255) DEFAULT NULL,
+  `cate_id` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `photos_url` varchar(255) DEFAULT NULL,
+  `sort` int(11) DEFAULT '100',
+  `add_time` int(11) DEFAULT NULL,
+  `update_time` int(11) DEFAULT NULL,
+  `status` int(2) DEFAULT '1',
+  `flag` int(11) DEFAULT '0' COMMENT '推荐标识',
+  `ip` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ariticle_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of parent_article
+-- ----------------------------
+INSERT INTO `parent_article` VALUES ('2', 'jljhuio', '23e', 'werwe', 'wssdfsdfsdfsd', '2', '6', null, '100', null, null, '1', '0', null);
+INSERT INTO `parent_article` VALUES ('3', 'asdxz', '想咋说的', '13123', '阿是穴', '1', '7', null, '100', null, null, '1', '0', null);
+
+-- ----------------------------
+-- Table structure for parent_category
+-- ----------------------------
+DROP TABLE IF EXISTS `parent_category`;
+CREATE TABLE `parent_category` (
+  `cate_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cate_name` varchar(30) NOT NULL,
+  `pid` int(11) DEFAULT '0',
+  `sort` int(4) DEFAULT '100',
+  `add_time` int(11) DEFAULT NULL,
+  `status` int(2) DEFAULT '1',
+  `update_time` int(11) DEFAULT NULL,
+  `desc` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`cate_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of parent_category
+-- ----------------------------
+INSERT INTO `parent_category` VALUES ('1', 'test1', '0', '100', null, '1', null, null);
+INSERT INTO `parent_category` VALUES ('2', 'test2', '0', '100', null, '1', null, null);
+
+-- ----------------------------
+-- Table structure for parent_comment
+-- ----------------------------
+DROP TABLE IF EXISTS `parent_comment`;
+CREATE TABLE `parent_comment` (
+  `comment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `article_id` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `comment_pid` int(11) DEFAULT '0',
+  `comment_content` varchar(255) DEFAULT NULL,
+  `add_time` int(11) DEFAULT NULL,
+  `status` int(2) NOT NULL DEFAULT '1',
+  `ip` int(11) DEFAULT NULL,
+  `comment_pic` int(11) DEFAULT NULL,
+  PRIMARY KEY (`comment_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of parent_comment
 -- ----------------------------
 
 -- ----------------------------
@@ -45128,6 +45199,23 @@ INSERT INTO `parent_district` VALUES ('45050', '梧桐镇', '4', '5024');
 INSERT INTO `parent_district` VALUES ('45051', '蔡家湖镇', '4', '5024');
 
 -- ----------------------------
+-- Table structure for parent_feedback
+-- ----------------------------
+DROP TABLE IF EXISTS `parent_feedback`;
+CREATE TABLE `parent_feedback` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `contact` varchar(30) DEFAULT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `add_time` int(11) DEFAULT NULL,
+  `status` int(2) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of parent_feedback
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for parent_file
 -- ----------------------------
 DROP TABLE IF EXISTS `parent_file`;
@@ -45156,47 +45244,22 @@ CREATE TABLE `parent_file` (
 -- ----------------------------
 DROP TABLE IF EXISTS `parent_friends`;
 CREATE TABLE `parent_friends` (
-  `group_id` int(11) NOT NULL DEFAULT '1',
   `uid` int(11) NOT NULL,
   `friend_uid` int(11) NOT NULL DEFAULT '1',
   `remarker` varchar(30) DEFAULT NULL COMMENT '备注信息',
   `add_time` int(11) DEFAULT NULL,
   `status` int(2) NOT NULL DEFAULT '1',
   `update_time` int(11) DEFAULT NULL,
-  PRIMARY KEY (`group_id`,`uid`,`friend_uid`)
+  PRIMARY KEY (`uid`,`friend_uid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of parent_friends
 -- ----------------------------
-INSERT INTO `parent_friends` VALUES ('1', '6', '7', null, null, '1', null);
-INSERT INTO `parent_friends` VALUES ('2', '6', '8', null, null, '1', null);
-INSERT INTO `parent_friends` VALUES ('3', '6', '9', null, null, '1', null);
-INSERT INTO `parent_friends` VALUES ('3', '6', '10', null, null, '1', null);
-
--- ----------------------------
--- Table structure for parent_group
--- ----------------------------
-DROP TABLE IF EXISTS `parent_group`;
-CREATE TABLE `parent_group` (
-  `group_id` int(11) NOT NULL AUTO_INCREMENT,
-  `group_name` varchar(30) NOT NULL,
-  `uid` int(11) NOT NULL,
-  `create_time` int(11) NOT NULL,
-  `status` int(2) NOT NULL DEFAULT '1',
-  `create_ip` bigint(20) NOT NULL,
-  `remarker` varchar(255) DEFAULT NULL COMMENT '备注',
-  `update_ip` bigint(20) NOT NULL,
-  PRIMARY KEY (`group_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of parent_group
--- ----------------------------
-INSERT INTO `parent_group` VALUES ('1', 'test', '6', '0', '1', '0', null, '0');
-INSERT INTO `parent_group` VALUES ('2', 'test2', '6', '0', '1', '0', null, '0');
-INSERT INTO `parent_group` VALUES ('3', 'test3', '6', '0', '1', '0', null, '0');
-INSERT INTO `parent_group` VALUES ('4', '2356', '7', '0', '1', '0', null, '0');
+INSERT INTO `parent_friends` VALUES ('6', '7', null, null, '1', null);
+INSERT INTO `parent_friends` VALUES ('6', '8', null, null, '1', null);
+INSERT INTO `parent_friends` VALUES ('6', '9', null, null, '1', null);
+INSERT INTO `parent_friends` VALUES ('7', '10', null, null, '1', null);
 
 -- ----------------------------
 -- Table structure for parent_invitation
@@ -45239,6 +45302,22 @@ CREATE TABLE `parent_level` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for parent_like
+-- ----------------------------
+DROP TABLE IF EXISTS `parent_like`;
+CREATE TABLE `parent_like` (
+  `like_id` int(11) NOT NULL AUTO_INCREMENT,
+  `article_id` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `add_time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`like_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of parent_like
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for parent_login_log
 -- ----------------------------
 DROP TABLE IF EXISTS `parent_login_log`;
@@ -45263,9 +45342,9 @@ DROP TABLE IF EXISTS `parent_member`;
 CREATE TABLE `parent_member` (
   `uid` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户ID',
   `username` varchar(30) NOT NULL DEFAULT '' COMMENT '用户名',
-  `email` varchar(60) NOT NULL,
+  `email` varchar(60) DEFAULT '',
   `password` varchar(255) NOT NULL COMMENT '密码',
-  `mobile` varchar(13) NOT NULL DEFAULT '' COMMENT '手机号',
+  `mobile` varchar(13) DEFAULT '' COMMENT '手机号',
   `income` varchar(30) NOT NULL DEFAULT '' COMMENT '收入',
   `job` varchar(255) NOT NULL DEFAULT '' COMMENT '工作职位',
   `sex` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '性别',
@@ -45279,19 +45358,21 @@ CREATE TABLE `parent_member` (
   `relation_tags` varchar(255) DEFAULT NULL COMMENT '家中人物',
   `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '会员状态',
   `photos` int(11) DEFAULT NULL,
+  `update_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`uid`),
   KEY `status` (`status`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='会员表';
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='会员表';
 
 -- ----------------------------
 -- Records of parent_member
 -- ----------------------------
-INSERT INTO `parent_member` VALUES ('6', '1233', '471720348@qq.com', 'e10adc3949ba59abbe56e057f20f883e', '18380113618', '', '', '0', '0000-00-00', '', '0', '2130706433', '1426652110', '', '', null, '1', null);
-INSERT INTO `parent_member` VALUES ('7', '132231', '12312', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '0', '0000-00-00', '', '0', '0', '0', '', '', null, '0', null);
-INSERT INTO `parent_member` VALUES ('8', '123', '12321', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '0', '0000-00-00', '', '0', '0', '0', '', '', null, '0', null);
-INSERT INTO `parent_member` VALUES ('9', '35', '123121', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '0', '0000-00-00', '', '0', '0', '0', '', '', null, '0', null);
-INSERT INTO `parent_member` VALUES ('10', '13', 'qweqwe', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '0', '0000-00-00', '', '0', '0', '0', '', '', null, '0', null);
-INSERT INTO `parent_member` VALUES ('11', '12133', '4717203481@qq.com', 'e10adc3949ba59abbe56e057f20f883e', '18380113612', '', '', '0', '0000-00-00', '', '0', '2130706433', '1426821462', '', '', null, '1', null);
+INSERT INTO `parent_member` VALUES ('6', '1233', '471720348@qq.com', '5ecd960b950d6deb0d85498fbcc604e5', '18380113618', '', '', '0', '0000-00-00', '', '0', '2130706433', '1428651674', '', '', null, '1', '18', '1428651674');
+INSERT INTO `parent_member` VALUES ('7', '132231', '12312', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '0', '0000-00-00', '', '0', '0', '0', '', '', null, '0', null, null);
+INSERT INTO `parent_member` VALUES ('8', '123', '12321', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '0', '0000-00-00', '', '0', '0', '0', '', '', null, '0', null, null);
+INSERT INTO `parent_member` VALUES ('9', '35', '123121', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '0', '0000-00-00', '', '0', '0', '0', '', '', null, '0', null, null);
+INSERT INTO `parent_member` VALUES ('10', '13', 'qweqwe', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '0', '0000-00-00', '', '0', '0', '0', '', '', null, '0', null, null);
+INSERT INTO `parent_member` VALUES ('11', '12133', '4717203481@qq.com', 'e10adc3949ba59abbe56e057f20f883e', '18380113612', '', '', '0', '0000-00-00', '', '0', '2130706433', '1426821462', '', '', null, '1', null, null);
+INSERT INTO `parent_member` VALUES ('12', '1234145', '', 'cb3f4332b12b996845ed74b59362e087', '', '', '', '0', '0000-00-00', '', '0', '2130706433', '1427695020', '', '', null, '1', null, '1427695020');
 
 -- ----------------------------
 -- Table structure for parent_picture
@@ -45306,10 +45387,39 @@ CREATE TABLE `parent_picture` (
   `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '状态',
   `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of parent_picture
+-- ----------------------------
+INSERT INTO `parent_picture` VALUES ('2', '/Uploads/Picture/2015-04-07/5523470a1fc49.jpg', '', '59cf7b93fa0c12fc7b70cdb19561ca5a', '7721a7ca5fa2d365a049b238daa8aa0f6e0ce724', '1', '1428375306');
+INSERT INTO `parent_picture` VALUES ('3', '/Uploads/Picture/2015-04-07/55234752a3f55.jpg', '', '30f5c6e2afd2f45bf1f02367f21bfb26', '5ca35f280da9de5ec341ecd285b87c6c4c2d76be', '1', '1428375378');
+INSERT INTO `parent_picture` VALUES ('12', '/Uploads/Picture/2015-04-07/55234b7f8798a.jpg', '', '6fd2022b9bd7b2ba54808aaa927b303d', '7e4fb67b2f5448ea2951df14c2b92e3f57caa0ab', '1', '1428376447');
+INSERT INTO `parent_picture` VALUES ('11', '/Uploads/Picture/2015-04-07/55234b5017309.jpg', '', '2831f80fb5ac1faf86c1420b834a4f01', 'ffdc8259467d9d2c7609ca5a39115ccde7b0b60a', '1', '1428376400');
+INSERT INTO `parent_picture` VALUES ('14', '/Uploads/Picture/2015-04-07/55234c5071d5b.jpg', '', '5afa1dd272046e704957e346aecc68f8', 'f588d78d92d0a35cd0b085bbdfbf89f6bbee81ae', '1', '1428376656');
+INSERT INTO `parent_picture` VALUES ('20', '/Uploads/Picture/2015-04-07/55234dec5613a.jpg', '', 'a99beeb91926a469f253c07baf9104b0', '4bce23c884b6725705e765dafd0c1f208030c121', '1', '1428377068');
+INSERT INTO `parent_picture` VALUES ('15', '/Uploads/Picture/2015-04-07/55234c79da69d.jpg', '', '17dc9c8404225b51ef8d5b9e189a7040', '3de324b6b9e518f06f1e46ab9894e19af87a60d9', '1', '1428376697');
+INSERT INTO `parent_picture` VALUES ('9', '/Uploads/Picture/2015-04-07/55234abf97e72.jpg', '', '816df6df4f01529bf31e5f351dc637fe', '585a8eddaf9b01a9cac964e18172e077f401a6e1', '1', '1428376255');
+INSERT INTO `parent_picture` VALUES ('16', '/Uploads/Picture/2015-04-07/55234cad863d5.jpg', '', '1f75068483181a0ea52afe623c271c2a', 'cb2ca9520752326b9ea3c0847ad5dc22c7124a45', '1', '1428376749');
+INSERT INTO `parent_picture` VALUES ('17', '/Uploads/Picture/2015-04-07/55234ccec4c4b.jpg', '', '3890b9adc672ca7c66b3b8b6c3692529', '52ba065b3e1dea46c9c483d6e361c1eb285c3376', '1', '1428376782');
+INSERT INTO `parent_picture` VALUES ('18', '/Uploads/Picture/2015-04-07/55234ce8ab138.jpg', '', '2c30147024a8481319e21e5bdc5a17eb', '453acf2a99aaaf1df11525e99398ddc3a3f00936', '1', '1428376808');
+INSERT INTO `parent_picture` VALUES ('19', '/Uploads/Picture/2015-04-07/55234d25bb8b1.jpg', '', '644c763c629e7ce641115a532d3c6de2', '68ef95b653f04f2f0b786e12c03a1e29d0c921d1', '1', '1428376869');
+
+-- ----------------------------
+-- Table structure for parent_problem
+-- ----------------------------
+DROP TABLE IF EXISTS `parent_problem`;
+CREATE TABLE `parent_problem` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` char(60) NOT NULL,
+  `content` varchar(255) NOT NULL,
+  `add_time` int(11) DEFAULT NULL,
+  `status` int(2) DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of parent_problem
 -- ----------------------------
 
 -- ----------------------------
@@ -45326,4 +45436,4 @@ CREATE TABLE `parent_session` (
 -- ----------------------------
 -- Records of parent_session
 -- ----------------------------
-INSERT INTO `parent_session` VALUES ('5unb0ni75uj5tldskukfgkj782', '1426829093', 0x7569647C733A313A2236223B);
+INSERT INTO `parent_session` VALUES ('d122kvdrqq95tqfnvtmmqie4l1', '1428733218', '');
