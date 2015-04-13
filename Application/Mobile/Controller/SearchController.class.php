@@ -3,6 +3,7 @@ namespace Mobile\Controller;
 use Think\Controller;
 use Api\Api\UserApi;
 use Api\Api\ArticleApi;
+use Api\Api\DistrictApi;
 class SearchController extends Controller {
     public function seachUser($username=''){
       $UserApi=new UserApi;
@@ -28,6 +29,12 @@ class SearchController extends Controller {
     public function getArticleList(){
       $ArticleApi=new ArticleApi;
       $res=$ArticleApi->getArticleList($_POST,$page,$page_count,$use_page);
+      echo json_encode($res);
+    }
+
+    public function  getDistrictList($upid=0,$level=1){
+      $DistrictApi=new DistrictApi;
+      $res=$DistrictApi->getDistrictList($upid,$level);
       echo json_encode($res);
     }
 }

@@ -1,0 +1,26 @@
+[ 2015-04-11T13:55:38+08:00 ] 127.0.0.1 /parents/index.php/Mobile/Problem/getProblem
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'create_time' in 'order clause'
+
+[ 2015-04-11T13:55:57+08:00 ] 127.0.0.1 /parents/index.php/Mobile/Problem/getProblem
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000329s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000331s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000395s ]
+SQL: SHOW COLUMNS FROM `parent_problem` [ RunTime:0.0025s ]
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'create_time' in 'order clause'
+
+[ 2015-04-11T13:56:18+08:00 ] 127.0.0.1 /parents/index.php/Mobile/Problem/getProblem
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000212s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000255s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000293s ]
+SQL: SHOW COLUMNS FROM `parent_problem` [ RunTime:0.0026s ]
+SQL: SELECT * FROM `parent_problem` WHERE ( status=1 ) ORDER BY add_time LIMIT 0,10   [ RunTime:0.0001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.036724s ]
+INFO: [ app_end ] --END-- [ RunTime:0.036776s ]
+

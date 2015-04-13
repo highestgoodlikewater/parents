@@ -47,7 +47,7 @@ class FileController extends Controller {
         //TODO: 用户登录检测
 
         /* 返回标准数据 */
-        $return  = array('status' => 1, 'content' => '上传成功', 'data' => '');
+        $return  = array('status' => 1, 'content' => '上传成功');
 
         /* 调用文件上传组件上传文件 */
         $Picture = D('Common/Picture');
@@ -60,9 +60,8 @@ class FileController extends Controller {
         ); //TODO:上传到远程服务器
 
         /* 记录图片信息 */
-        if($info){
-            $return['status'] = 1;
-            $return = array_merge($info['download'], $return);
+        if($info['photo']['id']>0){
+            $return = array_merge($info, $return);
         } else {
             $return['status'] = 0;
             $return['content']   = $Picture->getError();

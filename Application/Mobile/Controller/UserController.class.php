@@ -28,7 +28,7 @@ class UserController extends HomeController {
     }
     //修改密码
     public function changePasswd($password,$new_password){
-		$UserApi=new UserApi;
+		    $UserApi=new UserApi;
         $res=$UserApi->changePasswd(session('uid'),$password,$new_password);
         echo json_encode($res);
     }
@@ -36,16 +36,12 @@ class UserController extends HomeController {
     //更新用户信息
     public function updatePhoto(){
     	$info=R('File/uploadPicture');//上传头像的数据返回。
-        $msg['status']=1;
-        $msg['content']='';
-    	if ($data['status']!=0) {
-    		$data['photo']=$info['id'];
-
+        $msg['status']=$info['status'];
+        $msg['content']=$info['content'];
+    	if ($info['status']!=0) {
+    		$data['photos']=$info['photo']['id'];
     		$UserApi=new UserApi;
-            $res=$UserApi->updateInfo(session('uid'),$data);
-    	}else{
-			$msg['status']=0;
-	        $msg['content']=$info['content'];
+        $res=$UserApi->updateInfo(session('uid'),$data);
     	}
 
         echo json_encode($msg);

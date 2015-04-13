@@ -26,7 +26,7 @@ class MemberModel extends Model{
 		array('username', '', '用户名被占用', self::EXISTS_VALIDATE, 'unique'), //用户名被占用
 
 		/* 验证密码 */
-		array('password', '6,30', '密码长度不合法', self::EXISTS_VALIDATE, 'length'), //密码长度不合法
+		array('password', '6,60', '密码长度不合法', self::EXISTS_VALIDATE, 'length'), //密码长度不合法
 
 		/* 验证邮箱 */
 		array('email', 'email', '邮箱格式不正确', self::VALUE_VALIDATE), //邮箱格式不正确
@@ -42,7 +42,7 @@ class MemberModel extends Model{
 
 	/* 用户模型自动完成 */
 	protected $_auto = array(
-		array('password', 'md5', self::MODEL_BOTH, 'function'),
+		// array('password', 'md5', self::MODEL_BOTH, 'function'),
 		array('reg_time', NOW_TIME, self::MODEL_INSERT),
 		array('update_time', NOW_TIME, self::MODEL_BOTH),
 		array('reg_ip', 'get_client_ip', self::MODEL_INSERT, 'function', 1),
@@ -84,6 +84,7 @@ class MemberModel extends Model{
 		return 1; //TODO: 暂不限制，下一个版本完善
 	}
 
+
 	/**
 	 * 注册一个新用户
 	 * @param  string $username 用户名
@@ -95,7 +96,7 @@ class MemberModel extends Model{
 	public function register($username, $password, $email, $mobile){
 		$data = array(
 			'username' => $username,
-			'password' => $password,
+			'password' => md5($password),
 			'email'    => $email,
 			'mobile'   => $mobile,
 		);
@@ -241,11 +242,10 @@ class MemberModel extends Model{
 
 		//更新前检查用户密码
 		if(!$this->verifyUser($uid, $password)){
-			$this->error = '验证出错：密码不正确！';
+			$this->error = '密码不正确！';
 			return false;
 		}
-		$data['password']=$new_password;
-
+		$data['password']=md5($new_password);
 		//更新用户信息
 		$data = $this->create($data);
 		if($data){
@@ -259,6 +259,10 @@ class MemberModel extends Model{
 		if(empty($uid) ||empty($data)){
 			$this->error = '参数错误！';
 			return false;
+		}
+		if (isset($data['password'])) {
+			# code...
+			$data['password']=md5($data['password']);
 		}
 
 		//更新用户信息
@@ -293,7 +297,8 @@ class MemberModel extends Model{
 	 * @author huajie <banhuajie@163.com>
 	 */
 	protected function verifyUser($uid, $password_in){
-		$password = $this->getFieldById($uid, 'password');
+		$password = $this->getFieldByUid($uid,'password');
+
 		if(md5($password_in) === $password){
 			return true;
 		}
