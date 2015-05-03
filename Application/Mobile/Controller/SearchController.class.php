@@ -20,7 +20,7 @@ class SearchController extends Controller {
           $msg['status']=0;
           $msg['content']='个人信息获取失败！';
         }else{
-        	$res['photo']=getUrl($res['uid']);
+        	$res['photo']=getUrl($res['photos']);
         }
         echo json_encode($msg);
     }
@@ -36,5 +36,9 @@ class SearchController extends Controller {
       $DistrictApi=new DistrictApi;
       $res=$DistrictApi->getDistrictList($upid,$level);
       echo json_encode($res);
+    }
+
+    public function test($id){
+     echo  getUrl($id);
     }
 }

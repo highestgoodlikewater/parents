@@ -20,7 +20,17 @@ function  getUrl($id,$type='Picture',$detail=false){
     	}else{
     		$url=$info['savepath'];
     	}
-    	return $url;
+    	return "http://120.24.88.32/parents".$url;
     }
 
+}
+//ids 为逗号隔开的字符串
+function getRegionName($ids){
+  $data=explode(",", $ids);
+  $location="";
+  foreach ($data as $key => $value) {
+      # code...
+     $location.= M('district')->getFieldById($value,'name');
+  }
+  return $location;
 }

@@ -9,13 +9,15 @@ class UserController extends HomeController {
         $UserApi=new UserApi;
         $res=$UserApi->detailInfo(session('uid'));
 
-        $msg['status']=1;
-        $msg['content']=$res;
+        $msg['status']=1;       
         if ($res<0) {
           $msg['status']=0;
           $msg['content']='个人信息获取失败！';
         }else{
-        	$res['photo']=getUrl($res['uid']);
+        	$res['photos']=getUrl($res['photos']);
+          $res['home_district']=getRegionName($res['home_district']);
+          $res['live_district']=getRegionName($res['live_district']);
+          $msg['content']=$res;
         }
         echo json_encode($msg);
     }
